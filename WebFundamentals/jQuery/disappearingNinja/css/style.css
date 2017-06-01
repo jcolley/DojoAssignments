@@ -1,5 +1,6 @@
 #container{
     width: 500px;
+    min-height: 428px;
     margin: 0 auto;
     border: 1px solid #000000;
     text-align: center;
@@ -10,7 +11,7 @@
     width: 100px;
     height: 190px;
     margin: 10px;
-    border: 2px solid black;
+    opacity: 0;
     display: inline-block;
     text-align: center;
     background-image: url(../images/linkninja.png);

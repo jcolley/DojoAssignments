@@ -1,7 +1,13 @@
 $(document).ready(function(){
-    destroyNinja();
     generateNinja();
     revealNinja();
+});
+
+$(document).on("click",".ninja", function(){
+    $(this).slideUp("fast");
+    if($(".ninja:visible").length === 1){
+        resetNinja();
+    }
 });
 
 function generateNinja(){
@@ -22,22 +28,15 @@ function destroyNinja(){
 }
 
 function revealNinja(){
-    $(".ninja").slideDown("slow",function(){
+    $(".ninja").fadeTo(2000, 1.0,function(){
         if ($(this).is(':visible')){
             $(this).css('display','inline-block');
         }
     });
     $(".ninja").removeClass("hidden");
-    $(".ninja").click(function(){
-        $(this).slideUp("fast");
-        if($(".ninja:visible").length === 1){
-            resetNinja();
-        }
-    });
 }
 
 function resetNinja(){
-    destroyNinja();
     generateNinja();
     revealNinja();
 }
