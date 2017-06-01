@@ -1,3 +1,4 @@
+//Begin Disco Logo
 var counter = 0;
 var filters = ["hue-rotate(45deg)"
               , "hue-rotate(90deg)"
@@ -9,9 +10,6 @@ var filters = ["hue-rotate(45deg)"
 
 var div = $('#coloredDiv');
 var interval;
-
-
-
 $("#click button").click(function () {
     $("#logo").toggleClass("colorcycle");
     interval = window.setInterval(changeFilter, 286);
@@ -25,6 +23,7 @@ function changeFilter() {
         'filter': filter
     });
 }
+//End Disco Logo
 
 $("#hide button").click(function(){
     $("#logo").hide();
@@ -63,15 +62,15 @@ $("#addClass button").click(function(){
 });
 
 $("#before button").click(function(){
-    $("#before button").before($('<img class="before" src="images/before.png" alt="hand pointing left">'));
+    $("#before button").before('<img class="before" src="images/before.png" alt="hand pointing left">');
 });
 
 $("#after button").click(function(){
-    $("#after button").after($('<img class="after" src="images/after.png" alt="hand pointing right">'));
+    $("#after button").after('<img class="after" src="images/after.png" alt="hand pointing right">');
 });
 
 $("#append button").click(function(){
-    $("#append button").append($('<br><img class="append" src="images/deadlink.png" alt="a dead Link">'));
+    $("#append button").append('<br><img class="append" src="images/deadlink.png" alt="a dead Link">');
 });
 
 $("#html button").click(function(){
@@ -90,6 +89,8 @@ $("#text button").click(function(){
     alert("The text of the next button is: "+$("#data button").text());
 });
 
-$("#data button").click(function(){
-    
+$("#data > *").click(function(){
+    var num = jQuery.data(this,"clicked")+1 || 0;
+    jQuery.data(this,"clicked",num);
+    $(this).text()+": "+num;
 });
