@@ -1,0 +1,112 @@
+body{
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+#container{
+    margin: 0 auto;
+    padding: 0 10px 10px 10px;
+    width: 1290px;
+    background-color: #000000;
+    border-radius: 5px;
+}
+
+header{
+    margin-top: -20px;
+    height: 175px;
+    width: 1290px;
+    background-color: #000000;
+    border-radius: 5px;
+    border-style:dashed;
+}
+
+#logo{
+    width: 150px;
+    margin: 100px 0 0 30px;
+    position: fixed;
+    background-color: black;
+    border: 3px dashed #FFFFFF;
+    z-index: 2;
+}
+
+header button{
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 0 0 950px;
+    font-size: x-large;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #5555FF;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+#demos{
+    position: relative;
+}
+
+article{
+    border-bottom: 1px solid #FFFFFF;
+    height: 175px;
+    text-align: center;
+}
+
+article:hover{
+    background-color: #9bffa4;
+    border-color: #000000;
+    color: #000000;
+}
+
+article button{
+    font-size: x-large;
+}
+
+.colorcycle {
+    filter: none;
+    -webkit-filter: none;
+}
+
+.toggle{
+    background-color: #FFFFFF;
+}
+
+.class{
+    background-image:url("../images/class.png");
+    background-repeat: no-repeat;
+    background-position: 37px 38px;
+    background-size: 46%;
+}
+
+.before, .after, .append{
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#attr button{
+    margin-bottom: 5px;
+}
