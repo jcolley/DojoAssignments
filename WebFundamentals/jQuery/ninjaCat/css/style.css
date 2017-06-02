@@ -1,0 +1,12 @@
+#container{
+    width: 500px;
+    margin: 0 auto;
+}
+
+li{
+    width: 181px;
+    height: 42px;
+    margin: 15px;
+    display: block;
+    cursor:pointer;
+}
