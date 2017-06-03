@@ -1,8 +1,51 @@
+#container{
+    width: 1235px;
+    margin: 0 auto;
+}
+
 img{
     margin: 5px;
 }
 
-#container{
-    width: 1300px;
+#pokejail{
+    width: 970px;
     margin: 0 auto;
+    display: inline-block;
+}
+
+.poke{
+    display: inline-block;
+    vertical-align: top;
+    width: 160px;
+    height: 160px;
+}
+
+#pokedex{
+    width: 280px;
+    min-height: 450px;
+    padding: 0 0 10px 20px;
+    position: fixed;
+    display: inline-block;
+    vertical-align: top;
+    border: 15px solid red;
+}
+
+#pokedex img{
+    width: 145px;
+    margin: 0 auto;
+    display: block;
+}
+
+.poke img:hover {
+    -webkit-transform: scale(1.6); 
+    -moz-transform: scale(1.6);
+    -o-transform: scale(1.6);
+    transform: scale(1.6);
+}
+
+#pokejail img {
+	-webkit-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
 }
