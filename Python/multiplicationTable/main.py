@@ -1,4 +1,4 @@
 def multiplicationTable():
-    print("\n".join(("{:>4}"*13).format(*(i*j if i*j else i+j if i+j else "" for j in range(13))) for i in range(13)))
+    print("\n".join(("{:>4}"*13).format(*(l*k if l*k else l+k if l+k else "" for k in range(13))) for l in range(13)))
 
 multiplicationTable()
