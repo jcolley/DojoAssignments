@@ -7,7 +7,7 @@ students = [
 
 for i in students:
     print i['first_name'], i['last_name']
-print "*" * 40
+print "*" * 40 + "\n"
 
 users = {
  'Students': [
@@ -22,7 +22,7 @@ users = {
   ]
  }
 
-for key,val in users.iteritems():
+for key,val in users.items():
     count = 1
     print key
     for i in val:

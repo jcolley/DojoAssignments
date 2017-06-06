@@ -4,7 +4,7 @@ def typeList(thing):
     c = "mixed"
     output = ""
     for i in thing:
-        if(isinstance(i,int)):
+        if(isinstance(i,int) or isinstance(i,float)):
             a += i
         elif(isinstance(i,str)):
             b += i
