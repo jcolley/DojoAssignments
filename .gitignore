@@ -1,6 +1,6 @@
 .vscode
-Python/virtualenvflaskEnv/bin/
-Python/virtualenvflaskEnv/include/
-Python/virtualenvflaskEnv/lib/
-Python/virtualenvflaskEnv/.Python
-Python/virtualenvflaskEnv/pip-selfcheck.json
+Python/virtualenv/flaskEnv/bin/
+Python/virtualenv/flaskEnv/include/
+Python/virtualenv/flaskEnv/lib/
+Python/virtualenv/flaskEnv/.Python
+Python/virtualenv/flaskEnv/pip-selfcheck.json
