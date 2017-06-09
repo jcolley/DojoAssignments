@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div>
+        {% if color == "blue" %}
+            <img src="{{img1}}" alt="{{img1}}">
+        {% elif color == "orange" %}
+            <img src="{{img2}}" alt="{{img2}}">
+        {% elif color == "red" %}
+            <img src="{{img3}}" alt="{{img3}}">
+        {% elif color == "purple" %}
+            <img src="{{img4}}" alt="{{img4}}">
+        {% elif color != "" %}
+            <img src="{{img5}}" alt="{{img5}}">
+        {% endif %}
+        </div>
+    </body>
+</html>
