@@ -4,3 +4,5 @@ Python/virtualenv/flaskEnv/include/
 Python/virtualenv/flaskEnv/lib/
 Python/virtualenv/flaskEnv/.Python
 Python/virtualenv/flaskEnv/pip-selfcheck.json
+Python/virtualenv/flaskEnv/Scripts
+Python/virtualenv/flaskEnv/tcl
