@@ -14,7 +14,7 @@ def index():
     if 'guess' in request.form:
 
         guess = int(request.form['guess'])
-        print "Guess: " + str(guess) + ", Random #: " + str(session['num'])
+        print("Guess: " + str(guess) + ", Random #: " + str(session['num']))
 
         if guess > session['num']:
             session['state'] = 'high'
@@ -22,8 +22,8 @@ def index():
             session['state'] = 'low'
         else:
             session['state'] = 'win'
-    print session['state']
-    return render_template('index.html', state=session['state'])
+    print(session['state'])
+    return render_template('index.html', state=session['state'], num=session['num'])
 
 
 @app.route('/reset')

@@ -23,7 +23,7 @@
                     }else if(state == 'win'){
                         $("#status").removeClass();
                         $("#status").addClass("win");
-                        $("#status").html('<h1>YOU WIN!</h1><button id="btnReset" name="reset" onclick="window.location.replace(\'/reset\')">Reset</button>');
+                        $("#status").html('<h2>{{num}} was the number!</h2><button id="btnReset" name="reset" onclick="window.location.replace(\'/reset\')">Reset</button>');
                         $("#btnReset").appendTo("#status");
                         $("#btnReset").show();
                         $("#status").show();
