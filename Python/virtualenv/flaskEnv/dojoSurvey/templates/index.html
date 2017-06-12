@@ -5,7 +5,13 @@
     <body>
       <h1>Index Page</h1>
       <h3>Create a User</h3>
-      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
       <form action='/result' method='post'>
           Name: <input type='text' name='name'><br>
           Dojo Location: <select name='location'>
@@ -17,7 +23,8 @@
                                 <option value="Javascript">Javascript</option>
                                 <option value="Python">Python</option>
                             </select><br>
-          Comment (optional): <input type='textarea' name='comment'><br>
+          <p>Comment (optional):</p>
+          <textarea rows="5" cols="30" name='comment'></textarea><br>
           <input type='submit' value='create user'>
       </form>
     </body>
