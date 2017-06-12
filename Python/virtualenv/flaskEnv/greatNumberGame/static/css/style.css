@@ -1,0 +1,30 @@
+#container{
+    width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#status{
+    margin: 10px auto;
+    display: none;
+    border: 3px solid #000000;
+    width: 200px;
+    height: 200px;
+    vertical-align: middle;
+    line-height: 5;
+}
+
+.low, .high{
+    background-color: red;
+    color: white;
+}
+
+.win{
+    background-color: green;
+    text-shadow: 1px 1px 3px #FFFFFF;
+    line-height: 3;
+}
+
+#btnReset{
+    display: none;
+}

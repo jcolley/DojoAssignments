@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Great Number Game</title>
+        <meta charset="UTF-8">
+        <link href="static/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+            <h1>Welcome to the Great Number Game!</h1>
+            <p>I am thinking of a number between 1 and 100<br>Take a guess!</p>
+            <div id="status"></div>
+            <form name="guess" action="/" method="POST">
+                <input type="text" name="guess" value="" placeholder="GUESS!">
+                <button name="guess">Submit</button>
+            </form>
+            <script src="static/js/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    var state = "{{state}}";
+                    if(state == ""){
+                        // do nothing
+                    }else if(state == 'win'){
+                        $("#status").removeClass();
+                        $("#status").addClass("win");
+                        $("#status").html('<h1>YOU WIN!</h1><button id="btnReset" name="reset" onclick="window.location.replace(\'/reset\')">Reset</button>');
+                        $("#btnReset").appendTo("#status");
+                        $("#btnReset").show();
+                        $("#status").show();
+                    }else if(state == 'low'){
+                        $("#status").removeClass();
+                        $("#status").addClass("low");
+                        $("#status").html("<h1>Too Low</h1>");
+                        $("#status").show();
+                    }else if(state == 'high'){
+                        $("#status").removeClass();
+                        $("#status").addClass("high");
+                        $("#status").html("<h1>Too High</h1>");
+                        $("#status").show();
+                    }else{
+                        $("#status").removeClass();
+                        $("#status").hide();
+                    }
+                });
+            </script>
+        </div>
+    </body>
+</html>
