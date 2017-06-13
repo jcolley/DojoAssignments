@@ -6,3 +6,10 @@ Python/virtualenv/flaskEnv/.Python
 Python/virtualenv/flaskEnv/pip-selfcheck.json
 Python/virtualenv/flaskEnv/Scripts
 Python/virtualenv/flaskEnv/tcl
+Python/virtualenv/flaskSQL/bin/
+Python/virtualenv/flaskSQL/include/
+Python/virtualenv/flaskSQL/lib/
+Python/virtualenv/flaskSQL/.Python
+Python/virtualenv/flaskSQL/pip-selfcheck.json
+Python/virtualenv/flaskSQL/Scripts
+Python/virtualenv/flaskSQL/tcl
