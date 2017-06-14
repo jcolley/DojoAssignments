@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>Full Friends</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- we can use the line below to see all of our data in our template -->
+    {{ all_friends }}
+    <h1>These are all my friends!</h1>
+    <!-- with all the data we can then construct a more structured output -->
+    <div class="datagrid">
+    <table>
+        <thead>
+            <th>
+                Name
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Friend Since
+            </th>
+            <th>
+                Delete Friend
+            </th>
+        </thead>
+            {% for friend in all_friends: %}
+                <tr>
+                    <td>{{ friend['name'] }}</td>
+                    <td>{{ friend['age'] }}</td>
+                    <td>{{ friend['since'] }}</td>
+                    <td>
+                        <form action="/remove_friend/{{friend['id']}}" method='POST'>
+                            <button class="delete" type="submit" name="Delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+    </table>
+    </div>
+
+    <h2>Add a Friend</h2>
+    <form action='/friends' method='POST'>
+        <label for="name">Name:<input type="text" name="name" id="name"></label>
+        <label for="age">Age:<input type="text" name="age" id="age"></label>
+        <button type="submit" name="submit_button">Submit</button>
+    </form>
+</body>
+
+</html>
