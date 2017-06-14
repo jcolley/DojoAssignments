@@ -13,3 +13,4 @@ Python/virtualenv/flaskSQL/.Python
 Python/virtualenv/flaskSQL/pip-selfcheck.json
 Python/virtualenv/flaskSQL/Scripts
 Python/virtualenv/flaskSQL/tcl
+*.pyc
