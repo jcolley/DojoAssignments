@@ -11,17 +11,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `friendsdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `friendsdb` ;
+CREATE SCHEMA IF NOT EXISTS `allfriends` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `allfriends` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`friends`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `friendsdb`.`friends` (
+CREATE TABLE IF NOT EXISTS `allfriends`.`friends` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
-  `occupation` VARCHAR(45) NULL,
+  `age` VARCHAR(45) NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
