@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <title>The Wall</title>
+    <meta charset="UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="logo">
+                    CodingDojo Wall
+                </div>
+                <div id="welcome">
+                    Welcome, {{ session['user']['first_name'] }}
+                        <div id="logout">
+                            <a href="/logout">log off</a>
+                        </div>
+                </div>
+            </div>
+            <div id="wall">
+                <div id="message-form">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                <h3>Post a message:</h3>
+                <form action='/post' method='POST'>
+                    <textarea class="post_message" name="message" rows="10"></textarea>
+                    <button class="message_button" type="submit" name="submit" value="message">Post a message</button>
+                </form>
+                </div>
+                <div id="messages">
+                    {% with messages = all_messages %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h2>{{message['author']}} - {{message['date']}}</h2>
+                                <p>{{message['message']}}</p>
+                                {% with comments = msg_comments %}
+                                    {% if comments %}
+                                        {% for comment in comments %}
+                                            {% if comment['message_id'] == message['id'] %}
+                                                <h3>{{comment['author']}} - {{comment['date']}}</h3>
+                                                <p>{{comment['comment']}}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+
+                                <form action='/post' method='POST'>
+                                    <textarea class="post_comment" name="comment" rows="5"></textarea>
+                                    <input type="hidden" name="message_id" value="{{ message['id'] }}">
+                                    <button class="comment_button" type="submit" name="submit" value="comment">Post a comment</button>
+                                </form>
+
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
