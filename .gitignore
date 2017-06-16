@@ -1,5 +1,6 @@
 .vscode
 *.pyc
+*.DS.Store
 Python/virtualenv/flaskEnv/bin/
 Python/virtualenv/flaskEnv/include/
 Python/virtualenv/flaskEnv/lib/
