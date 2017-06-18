@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load staticfiles %}
+        <title>Surprise Me!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'surprise_me/css/style.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+            <h1>{{msg}}</h1>
+            {% if num == 0 %}
+            <form action='/results' method="POST">
+                {% csrf_token %}
+                <p>Pick a number: <input type="text" name="num" placeholder="0"></p>
+                <button type="submit" name="submit" value="submit">Ready!</button>
+            </form>
+            {% elif num > 0 %}
+            <div id="list">
+                {% for each in list %}
+                <p class="item">{{each}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
