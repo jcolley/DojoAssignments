@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load staticfiles %}
+        <title>Landscapes</title>
+        <meta charset="UTF-8">
+        <link href="{% static 'land_scapes/css/style.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+            <h1>{{msg}}</h1>
+            {% if img != '1' %}
+            <img src="static/land_scapes/img/{{img}}" alt="{{alt}}">
+            {% endif %}
+        </div>
+    </body>
+</html>
