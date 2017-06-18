@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div>
+        {% if color == "none" %}
+            No ninja's here!
+        {% elif color == False %}
+            <img src="{% static 'dNinjas/img/tmnt.png' %}" alt="TMNT">
+        {% elif color == "blue" %}
+            <img src="{% static img1}} %}" alt="{% static img1 %}">
+        {% elif color == "orange" %}
+            <img src="{% static img2 %}" alt="{% static img2 %}">
+        {% elif color == "red" %}
+            <img src="{% static img3 %}" alt="{% static img3 %}">
+        {% elif color == "purple" %}
+            <img src="{% static img4 %}" alt="{% static img4 %}">
+        {% elif color != "" %}
+            <img src="{% static img5 %}" alt="{% static img5 %}">
+        {% endif %}
+        </div>
+    </body>
+</html>
