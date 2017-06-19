@@ -54,7 +54,7 @@ cd $projectName
 
 cd $appName
 
-python manage.py startapp $appName
+python ../manage.py startapp $appName
 
 cd ..
 
