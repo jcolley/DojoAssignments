@@ -50,9 +50,7 @@ django-admin startproject $projectName
 
 mkdir -p ./$projectName/apps
 
-cd $projectName
-
-cd $appName
+cd ./$projectName/apps
 
 python ../manage.py startapp $appName
 
@@ -62,7 +60,7 @@ mkdir -p ./apps/$appName/templates/$appName ./apps/$appName/static/$appName
 
 touch ./apps/__init__.py ./apps/$appName/urls.py ./apps/$appName/templates/$appName/index.html
 
-python manage.py migrate
+python ./manage.py migrate
 
 if [ $editor != "none" ]
 then
