@@ -10,7 +10,7 @@
 clear
 prompt="?"
 title="Is your terminal inside a virtualenv?"
-options=("Y" "N")
+options=("Yes" "No")
 
 echo "$title"
 PS3="$prompt "
