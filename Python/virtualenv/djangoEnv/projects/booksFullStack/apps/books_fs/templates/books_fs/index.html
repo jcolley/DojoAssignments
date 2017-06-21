@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load staticfiles %}
+    <title>Books - Full Stack</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'books_fs/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container">
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Author
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>
+                            {{book.id}}
+                        </td>
+                        <td>
+                            {{book.title}}
+                        </td>
+                        <td>
+                            {{book.author}}
+                        </td>
+                        <td>
+                            {{book.category}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h1>Add a Book</h1>
+        <form action="/addbook" method="POST">
+            {% csrf_token %}
+            <input id="title" type="text" name="title" placeholder="Title">
+            <input id="category" type="text" name="category" placeholder="Category">
+            <input id="author" type="text" name="author" placeholder="Author"><br>
+            <button type="submit" name="submit" value="submit">Submit!</button>
+        </form>
+    </div>
+</body>
+
+</html>

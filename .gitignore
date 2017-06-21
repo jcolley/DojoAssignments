@@ -1,4 +1,6 @@
 .vscode
+*.pyc
+*.DS.Store
 Python/virtualenv/flaskEnv/bin/
 Python/virtualenv/flaskEnv/include/
 Python/virtualenv/flaskEnv/lib/
@@ -6,3 +8,18 @@ Python/virtualenv/flaskEnv/.Python
 Python/virtualenv/flaskEnv/pip-selfcheck.json
 Python/virtualenv/flaskEnv/Scripts
 Python/virtualenv/flaskEnv/tcl
+Python/virtualenv/flaskSQL/bin/
+Python/virtualenv/flaskSQL/include/
+Python/virtualenv/flaskSQL/lib/
+Python/virtualenv/flaskSQL/.Python
+Python/virtualenv/flaskSQL/pip-selfcheck.json
+Python/virtualenv/flaskSQL/Scripts
+Python/virtualenv/flaskSQL/tcl
+Python/virtualenv/djangoEnv/bin/
+Python/virtualenv/djangoEnv/include/
+Python/virtualenv/djangoEnv/lib/
+Python/virtualenv/djangoEnv/.Python
+Python/virtualenv/djangoEnv/pip-selfcheck.json
+Python/virtualenv/djangoEnv/Scripts
+Python/virtualenv/djangoEnv/tcl
+Python/virtualenv/djangoEnv/share/
