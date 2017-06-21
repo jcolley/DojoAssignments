@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load staticfiles %}
+    <title>Courses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'courses_app/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="content">
+        <h3>Add a new course</h3>
+        <form action="/courses/add" method="POST">
+            {% csrf_token %}
+            <input name="name" type="text" placeholder="course name">
+            <textarea name="description" placeholder="course description"></textarea>
+            <button type="submit" value="submit">Add</button>
+        </form>
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Course Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Date Added
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>
+                            {{course.name}}
+                        </td>
+                        <td>
+                            {{course.description}}
+                        </td>
+                        <td>
+                            {{course.created_at}}
+                        </td>
+                        <td>
+                            <a href="/courses/destroy/{{course.id}}">remove</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
