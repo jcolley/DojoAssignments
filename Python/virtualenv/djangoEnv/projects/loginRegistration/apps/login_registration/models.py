@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models, IntegrityError
+import bcrypt
 import re
 
 
@@ -35,7 +36,8 @@ class UserManager(models.Manager):
                     first_name=postData['first_name'],
                     last_name=postData['last_name'],
                     email=postData['email'],
-                    password=postData['password'])
+                    password=(bcrypt.hashpw(postData['password'].encode(), bcrypt.gensalt())))
+                print user.password
                 user.save()
                 results['user'] = user
             except IntegrityError as e:
@@ -49,8 +51,12 @@ class UserManager(models.Manager):
     def loginVal(self, postData):
         results = {'status': True, 'user': None, 'errors': []}
         try:
-            user = User.objects.get(email=postData['email'], password=postData['password'])
-        except:
+            user = User.objects.get(email=postData['email'])
+            if user.password == bcrypt.hashpw(postData['password'].encode(), user.password.encode()):
+                pass
+            else:
+                raise Exception()
+        except Exception as e:
             results['status'] = False
             results['errors'].append("Incorrect Username or Password")
 
