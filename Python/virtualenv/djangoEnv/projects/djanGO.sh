@@ -56,7 +56,7 @@ python ../manage.py startapp $appName
 
 cd ..
 
-mkdir -p ./apps/$appName/templates/$appName ./apps/$appName/static/$appName
+mkdir -p ./apps/$appName/templates/$appName ./apps/$appName/static/$appName/css ./apps/$appName/static/$appName/js ./apps/$appName/static/$appName/img
 
 touch ./apps/__init__.py ./apps/$appName/urls.py ./apps/$appName/templates/$appName/index.html
 
