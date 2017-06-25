@@ -16,7 +16,7 @@ class UserManager(models.Manager):
             results['status'] = False
             results['errors'].append('Please enter a valid alias')
         if not postData['email'] or not re.match(
-            r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
+                r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
                 postData['email']
         ):
             results['status'] = False
@@ -29,7 +29,6 @@ class UserManager(models.Manager):
             results['errors'].append('Passwords do not match')
 
         user = User.objects.filter(email=postData['email'])
-        print user
         if results['status']:
             try:
                 user = User.objects.create(
@@ -42,7 +41,8 @@ class UserManager(models.Manager):
             except IntegrityError as e:
                 results['status'] = False
                 if 'UNIQUE constraint' in e.message:
-                    results['errors'].append('That email is already registered.')
+                    results['errors'].append(
+                        'That email is already registered.')
                 else:
                     results['errors'].append(e.message)
         return results
@@ -75,7 +75,8 @@ class BookManager(models.Manager):
             results['errors'].append('Please choose or add a new Author')
         if not postData['review'] or len(postData['review']) < 10:
             results['status'] = False
-            results['errors'].append('Please leave a valid review (more than 10 characters)')
+            results['errors'].append(
+                'Please leave a valid review (more than 10 characters)')
         if not postData['rating'] or postData['rating'] == 'none':
             results['status'] = False
             results['errors'].append('Please select a rating.')
@@ -90,21 +91,23 @@ class BookManager(models.Manager):
             author.save()
             book = Book.objects.create(
                 title=postData['title'],
-                author=author.id,
+                author=author,
             )
             book.save()
             review = Review.objects.create(
-                    books=book.id,
-                    user=postData['user_id'],
-                    content=postData['review'],
-                    rating=postData['rating']
-                    )
+                books=book,
+                user=postData['user'],
+                content=postData['review'],
+                rating=postData['rating']
+            )
             review.save()
-            results['book'] = book
+
         except IntegrityError as e:
             results['status'] = False
             results['errors'].append(e.message)
 
+        if results['status']:
+            results['book'] = book
         return results
 
 

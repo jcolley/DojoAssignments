@@ -63,7 +63,7 @@ def booksAdd(request):
         'user': user,
         'authors': authors,
     }
-    return render(request, 'belt_review/booksAdd.html')
+    return render(request, 'belt_review/booksAdd.html', context)
 
 
 def addBook(request):
@@ -76,8 +76,7 @@ def addBook(request):
             messages.error(request, error)
     else:
         messages.success(request, 'Book Successfully Added.')
-    print results
-    return render(request, '/books/'+str(results.Book['id']))
+    return render(request, '/books/'+str(results['id']))
 
 
 def booksView(request):

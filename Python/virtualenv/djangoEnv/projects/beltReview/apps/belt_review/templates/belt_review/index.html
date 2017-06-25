@@ -13,27 +13,27 @@
         <h3>Welcome, {{user.name}}!</h3>
         <h3>Recent Book Reviews:</h3>
         {% for book in books %}
-            <div>
-                <a href="/books/{{book.id}}">{{book.title}}</a><br>
-                Rating: 
-                {% for x in ""|ljust:book.rating %}
-                    <img width="100px" src="{% static '/belt_review/img/star.png' %}">
-                {% endfor %}
-                {% for review in reviews %}
-                    <p>
-                        <a href="/users/{{review.user_id}}">{{review.user_name}}</a> says: {{review.content}}<br>
-                        <i>Posted on {{review.date}}</i>
-                    </p>
-                {% endfor %}
-            </div>
-            <div>
-                <h3>Other Books with Reviews:</h3>
-                <div>
-                    {%for book in books %}
-                        <h4><a href="/books/{{book.id}}">{{book.title}}</a></h4>
-                    {% endfor %}
-                </div>
-            </div>
+        <div>
+            <a href="/books/{{book.id}}">{{book.title}}</a><br>
+            Rating: 
+            {% for x in ""|ljust:book.rating %}
+                <img width="100px" src="{% static '/belt_review/img/star.png' %}">
+            {% endfor %}
+            {% for review in reviews %}
+                <p>
+                    <a href="/users/{{review.user_id}}">{{review.user_name}}</a> says: {{review.content}}<br>
+                    <i>Posted on {{review.date}}</i>
+                </p>
+            {% endfor %}
+        </div>
         {% endfor %}
+        <div>
+            <h3>Other Books with Reviews:</h3>
+            <div>
+                {%for book in books %}
+                    <h4><a href="/books/{{book.id}}">{{book.title}}</a></h4>
+                {% endfor %}
+            </div>
+        </div>
     </body>
 </html>
