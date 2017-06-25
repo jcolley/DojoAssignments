@@ -7,6 +7,9 @@ from .models import User, Book, Review, Author
 
 # Create your views here.
 def index(request):
+    # Book.objects.all().delete()
+    # Author.objects.all().delete()
+    # Review.objects.all().delete()
     return render(request, 'login_registration/index.html')
 
 
@@ -58,10 +61,8 @@ def booksAdd(request):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
     user = User.objects.get(id=request.session.get('id'))
-    authors = Author.objects.all()
     context = {
         'user': user,
-        'authors': authors,
     }
     return render(request, 'belt_review/booksAdd.html', context)
 
@@ -76,14 +77,22 @@ def addBook(request):
             messages.error(request, error)
     else:
         messages.success(request, 'Book Successfully Added.')
-    return render(request, '/books/'+str(results['id']))
+    return redirect('books/'+str(results['book'].id))
 
 
-def booksView(request):
+def booksView(request, id):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
-    pass
+    book = Book.objects.get(id=id)
+    author = book.author.name
+    reviews = book.reviews.all()
+    context = {
+        'book': book,
+        'author': author,
+        'Reviews': reviews,
+    }
+    return render(request, 'belt_review/book.html', context)
 
 
 def userProfile(request):

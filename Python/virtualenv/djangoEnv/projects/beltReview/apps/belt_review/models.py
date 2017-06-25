@@ -55,7 +55,7 @@ class UserManager(models.Manager):
                 pass
             else:
                 raise Exception()
-        except Exception as e:
+        except:
             results['status'] = False
             results['errors'].append("Incorrect Username or Password")
 
@@ -81,12 +81,13 @@ class BookManager(models.Manager):
             results['status'] = False
             results['errors'].append('Please select a rating.')
 
-        if postData['choseAuthor']:
+        if postData['choseAuthor'] != 'none':
             author = postData['choseAuthor']
         else:
             author = postData['addAuthor']
 
         try:
+            user = User.objects.get(id=postData['user_id'])
             author = Author.objects.create(name=author)
             author.save()
             book = Book.objects.create(
@@ -95,12 +96,12 @@ class BookManager(models.Manager):
             )
             book.save()
             review = Review.objects.create(
-                books=book,
-                user=postData['user'],
                 content=postData['review'],
                 rating=postData['rating']
             )
             review.save()
+            review.books.add(book)
+            review.users.add(user)
 
         except IntegrityError as e:
             results['status'] = False
@@ -122,7 +123,7 @@ class User(models.Model):
     objects = UserManager()
 
     def __str__(self):
-        return self.name + "\\" + self.alias + " - " + self.email + "Created: " + str(self.created_at)
+        return self.name + "\\" + self.alias + " - " + self.email + " - " + "Created: " + str(self.created_at)
 
 
 class Book(models.Model):
@@ -134,7 +135,7 @@ class Book(models.Model):
     objects = BookManager()
 
     def __str__(self):
-        return self.title + "Created: " + str(self.created_at)
+        return self.title + " - " + "Created: " + str(self.created_at)
 
 
 class Author(models.Model):
@@ -143,13 +144,16 @@ class Author(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + "Created: " + str(self.created_at)
+        return self.name + " - " + "Created: " + str(self.created_at)
 
 
 class Review(models.Model):
     content = models.TextField(blank=False, null=False)
     rating = models.CharField(max_length=1)
     books = models.ManyToManyField('Book', related_name="reviews")
-    user = models.ManyToManyField('User', related_name="reviews")
+    users = models.ManyToManyField('User', related_name="reviews")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.content + " - " + str(self.rating) + ", " + str(self.users)

@@ -13,15 +13,21 @@
         <a href="/logout">Logout</a>
     </div>
     <h3>{{book.title}}</h3>
-    Author: {{book.author}}
+    Author: {{book.author.name}}
     <div>
-        {% for review in Reviews %}
+        {% for review in book.reviews.all %}
         <p>
-            Rating: {{review.rating}}
-            <a href="/users/{{review.user_id}}">{{review.user_name}}</a> says: {{review.content}}<br>
-            <i>Posted on {{review.date}}</i>
+            Rating: 
+            {% for i in "x"|rjust:review.rating %}
+            <img src="{% static 'belt_review/img/star.png' %}" style="width: 25px; margin-bottom: -8px;">
+            {% endfor %}
+            <br>
+            <a href="/users/{{review.user_id}}">{{review.user.name}}</a> says: {{review.content}}<br>
+            <i>Posted on {{review.created_at}}</i>
+            <br>
+            {{review.users}}
         </p>
-            {% if review.user_id == request.session['id'] %}
+            {% if review.users == request.session.id %}
                 <a href="/deleteReview/{{review.id}}">Delete this Review</a>
             {% endif %} 
         {% endfor %}

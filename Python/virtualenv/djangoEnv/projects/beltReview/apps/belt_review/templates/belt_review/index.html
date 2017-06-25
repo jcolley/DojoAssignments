@@ -10,7 +10,7 @@
             <a href="/books/add">Add Book and Review</a>&nbsp;&nbsp;
             <a href="/logout">Logout</a>
         </div>
-        <h3>Welcome, {{user.name}}!</h3>
+        <h3>Welcome, {{user.alias}}!</h3>
         <h3>Recent Book Reviews:</h3>
         {% for book in books %}
         <div>
@@ -19,10 +19,10 @@
             {% for x in ""|ljust:book.rating %}
                 <img width="100px" src="{% static '/belt_review/img/star.png' %}">
             {% endfor %}
-            {% for review in reviews %}
+            {% for review in book.reviews.all %}
                 <p>
-                    <a href="/users/{{review.user_id}}">{{review.user_name}}</a> says: {{review.content}}<br>
-                    <i>Posted on {{review.date}}</i>
+                    <a href="/users/{{review.users}}">{{review.users}}</a> says: {{review.content}}<br>
+                    <i>Posted on {{review.created_at}}</i>
                 </p>
             {% endfor %}
         </div>

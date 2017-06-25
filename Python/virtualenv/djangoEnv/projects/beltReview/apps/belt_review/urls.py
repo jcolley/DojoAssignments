@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^books$', views.books),
     url(r'^books/add$', views.booksAdd),
     url(r'^addBook$', views.addBook),
-    url(r'^books/\d+', views.booksView),
-    url(r'^users/\d+', views.userProfile),
-    url(r'^review/\d+', views.addDeleteReview),
+    url(r'^books/(?P<id>\d+)', views.booksView),
+    url(r'^users/(?P<id>\d+)', views.userProfile),
+    url(r'^review/(?P<id>\d+)', views.addDeleteReview),
 ]
