@@ -16,12 +16,12 @@
         <div>
             <a href="/books/{{book.id}}">{{book.title}}</a><br>
             Rating: 
-            {% for x in ""|ljust:book.rating %}
-                <img width="100px" src="{% static '/belt_review/img/star.png' %}">
+            {% for x in ""|ljust:book.review_set.first.rating %}
+                <img src="{% static 'belt_review/img/star.png' %}" style="width: 25px; margin-bottom: -8px;">
             {% endfor %}
-            {% for review in book.reviews.all %}
+            {% for review in book.review_set.all %}
                 <p>
-                    <a href="/users/{{review.users}}">{{review.users}}</a> says: {{review.content}}<br>
+                    <a href="/users/{{review.users}}">{{review.users.all.first.alias}}</a> says: {{review.content}}<br>
                     <i>Posted on {{review.created_at}}</i>
                 </p>
             {% endfor %}

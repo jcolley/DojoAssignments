@@ -16,7 +16,7 @@
             <strong>Author:</strong><br>
             <select name="choseAuthor">
                 <option value="none" selected>Choose an Author</option>
-                {% for author in Authors %}
+                {% for author in authors %}
                     <option value="{{author.id}}">{{author.name}}</option>
                 {% endfor %}
             </select>

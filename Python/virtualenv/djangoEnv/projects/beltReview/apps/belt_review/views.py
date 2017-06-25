@@ -61,8 +61,10 @@ def booksAdd(request):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
     user = User.objects.get(id=request.session.get('id'))
+    authors = Author.objects.all()
     context = {
         'user': user,
+        'authors': authors,
     }
     return render(request, 'belt_review/booksAdd.html', context)
 
@@ -86,7 +88,7 @@ def booksView(request, id):
         return redirect('/')
     book = Book.objects.get(id=id)
     author = book.author.name
-    reviews = book.reviews.all()
+    reviews = book.review_set.all()
     context = {
         'book': book,
         'author': author,
@@ -102,8 +104,18 @@ def userProfile(request):
     pass
 
 
-def addDeleteReview(request):
+def addReview(request):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
     pass
+
+
+def delReview(request, bookid, id):
+    if not request.session.get('id'):
+        messages.error(request, 'Access Denied. Log in first.')
+        return redirect('/')
+    returnpath = '/books/' + bookid
+    Review.objects.get(id=id).delete()
+
+    return redirect(returnpath)

@@ -123,7 +123,7 @@ class User(models.Model):
     objects = UserManager()
 
     def __str__(self):
-        return self.name + "\\" + self.alias + " - " + self.email + " - " + "Created: " + str(self.created_at)
+        return str(self.id) + ":" + self.name + "\\" + self.alias + " - " + self.email + " - " + "Created: " + str(self.created_at)
 
 
 class Book(models.Model):
@@ -135,7 +135,7 @@ class Book(models.Model):
     objects = BookManager()
 
     def __str__(self):
-        return self.title + " - " + "Created: " + str(self.created_at)
+        return str(self.id) + ":" + self.title + " - " + "Created: " + str(self.created_at)
 
 
 class Author(models.Model):
@@ -144,16 +144,16 @@ class Author(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " - " + "Created: " + str(self.created_at)
+        return str(self.id) + ":" + self.name + " - " + "Created: " + str(self.created_at)
 
 
 class Review(models.Model):
     content = models.TextField(blank=False, null=False)
     rating = models.CharField(max_length=1)
-    books = models.ManyToManyField('Book', related_name="reviews")
-    users = models.ManyToManyField('User', related_name="reviews")
+    books = models.ManyToManyField(Book)
+    users = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.content + " - " + str(self.rating) + ", " + str(self.users)
+        return str(self.id) + ":" + self.content + " - " + str(self.rating) + ", " + str(self.users)

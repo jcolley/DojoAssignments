@@ -15,28 +15,27 @@
     <h3>{{book.title}}</h3>
     Author: {{book.author.name}}
     <div>
-        {% for review in book.reviews.all %}
+        {% for review in book.review_set.all %}
         <p>
             Rating: 
             {% for i in "x"|rjust:review.rating %}
             <img src="{% static 'belt_review/img/star.png' %}" style="width: 25px; margin-bottom: -8px;">
             {% endfor %}
             <br>
-            <a href="/users/{{review.user_id}}">{{review.user.name}}</a> says: {{review.content}}<br>
+            <a href="/users/{{review.users.all.first.id}}">{{review.users.all.first.alias}}</a> says: {{review.content}}<br>
             <i>Posted on {{review.created_at}}</i>
             <br>
-            {{review.users}}
         </p>
-            {% if review.users == request.session.id %}
-                <a href="/deleteReview/{{review.id}}">Delete this Review</a>
+            {% if review.users.all.first.id == request.session.id %}
+                <a href="/delReview/{{book.id}}/{{review.id}}">Delete this Review</a>
             {% endif %} 
         {% endfor %}
     </div>
     <div>
         <form action="/review" method="POST">
             {% csrf_token %}
-            <input type="hidden" value="{{user_id}}" name="user_id">
-            <input type="hidden" value="{{book_id}}" name="book_id">
+            <input type="hidden" value="{{request.session.id}}" name="user_id">
+            <input type="hidden" value="{{book.id}}" name="book_id">
             <textarea name="review"></textarea>
             <button type="submit" value="submit" name="submit">Submit Review</button>
         </form>
