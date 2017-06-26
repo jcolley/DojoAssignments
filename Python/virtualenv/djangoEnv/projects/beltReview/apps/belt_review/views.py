@@ -46,7 +46,7 @@ def books(request):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
     user = User.objects.get(id=request.session.get('id'))
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('-created_at')[:3]
     reviews = Review.objects.all()
     context = {
         'user': user,
@@ -102,10 +102,15 @@ def userProfile(request, id):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
+    commented = {'books': []}
     user = User.objects.get(id=id)
-    books = Books.objects.all()
+    booktests = Book.objects.all()
+    for book in booktests:
+        if book.review_set.all().filter(users=User.objects.get(id=id)):
+            commented['books'].append(book)
     context = {
         'user': user,
+        'books': commented['books'],
     }
     return render(request, 'belt_review/user.html', context)
 

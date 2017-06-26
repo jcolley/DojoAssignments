@@ -20,23 +20,29 @@
         {% for book in books %}
         <div>
             <a href="/books/{{book.id}}">{{book.title}}</a><br>
-            Rating: 
-            {% for x in ""|ljust:book.review_set.first.rating %}
-                <img src="{% static 'belt_review/img/star.png' %}" style="width: 25px; margin-bottom: -8px;">
-            {% endfor %}
+            {% if book.review_set.first.rating|length > 0 %}
+                Rating: 
+                {% for x in ""|ljust:book.review_set.first.rating %}
+                    <img src="{% static 'belt_review/img/star.png' %}" style="width: 25px; margin-bottom: -8px;">
+                {% endfor %}
             {% for review in book.review_set.all %}
                 <p>
                     <a href="/users/{{review.users.first.id}}">{{review.users.all.first.alias}}</a> says: {{review.content}}<br>
                     <i>Posted on {{review.created_at}}</i>
                 </p>
             {% endfor %}
+            {% else %}
+                <p style="margin-top: -2px;">No Reviews Yet! - <a href="/books/{{book.id}}">Leave One!</a></p>
+            {% endif %}
         </div>
         {% endfor %}
         <div>
             <h3>Other Books with Reviews:</h3>
             <div>
                 {%for book in books %}
-                    <h4><a href="/books/{{book.id}}">{{book.title}}</a></h4>
+                    {% if book.review_set.all|length > 0 %}
+                        <h4><a href="/books/{{book.id}}">{{book.title}}</a></h4>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

@@ -18,7 +18,7 @@
         <h2>User Alias: {{user.alias}}</h2>
         <h3>Name: {{user.name}}</h3>
         <h3>Email: {{user.email}}</h3>
-        <h4>Total Reviews: {{user.reviews.count}}</h4>
+        <h4>Total Reviews: {{user.review_set.count}}</h4>
         <div>
             <h3>Posted Reviews on the following books:</h3>
             {% for book in books %}
