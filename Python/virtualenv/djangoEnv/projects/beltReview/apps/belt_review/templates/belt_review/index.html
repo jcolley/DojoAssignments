@@ -6,6 +6,11 @@
         <meta charset="UTF-8">
     </head>
     <body>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message|safe}}</p>
+            {% endfor %}
+        {% endif %}
         <div>
             <a href="/books/add">Add Book and Review</a>&nbsp;&nbsp;
             <a href="/logout">Logout</a>
@@ -21,7 +26,7 @@
             {% endfor %}
             {% for review in book.review_set.all %}
                 <p>
-                    <a href="/users/{{review.users}}">{{review.users.all.first.alias}}</a> says: {{review.content}}<br>
+                    <a href="/users/{{review.users.first.id}}">{{review.users.all.first.alias}}</a> says: {{review.content}}<br>
                     <i>Posted on {{review.created_at}}</i>
                 </p>
             {% endfor %}

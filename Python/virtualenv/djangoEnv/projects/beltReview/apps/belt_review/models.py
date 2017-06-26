@@ -70,9 +70,13 @@ class BookManager(models.Manager):
         if not postData['title']:
             results['status'] = False
             results['errors'].append('Please enter a valid title')
-        if not postData['choseAuthor'] or not postData['addAuthor']:
+        print("choseAuthor: " + postData['choseAuthor'] + " | addAuthor: " + postData['addAuthor'])
+        if postData['choseAuthor'] == 'none' and len(postData['addAuthor']) < 3:
             results['status'] = False
             results['errors'].append('Please choose or add a new Author')
+        elif postData['choseAuthor'] != 'none' and len(postData['addAuthor']) > 0:
+            results['status'] = False
+            results['errors'].append('Choose an Author <strong>OR</strong> create a new one, not both.')
         if not postData['review'] or len(postData['review']) < 10:
             results['status'] = False
             results['errors'].append(
@@ -82,14 +86,17 @@ class BookManager(models.Manager):
             results['errors'].append('Please select a rating.')
 
         if postData['choseAuthor'] != 'none':
-            author = postData['choseAuthor']
+            author = int(postData['choseAuthor'])
+            author = Author.objects.get(id=author)
         else:
             author = postData['addAuthor']
+            author = Author.objects.create(name=author)
+            author.save()
+
+        print(author)
 
         try:
             user = User.objects.get(id=postData['user_id'])
-            author = Author.objects.create(name=author)
-            author.save()
             book = Book.objects.create(
                 title=postData['title'],
                 author=author,
@@ -109,6 +116,39 @@ class BookManager(models.Manager):
 
         if results['status']:
             results['book'] = book
+        return results
+
+
+class ReviewManager(models.Manager):
+    def addReview(self, postData):
+        results = {'status': True, 'errors': [], 'review': None}
+        if not postData['review'] or len(postData['review']) < 10:
+            results['status'] = False
+            results['errors'].append(
+                'Please leave a valid review (more than 10 characters)')
+        if not postData['rating'] or postData['rating'] == 'none':
+            results['status'] = False
+            results['errors'].append('Please select a rating.')
+
+        try:
+            user = User.objects.get(id=postData['user_id'])
+            book = Book.objects.get(id=postData['book_id'])
+
+            review = Review.objects.create(
+                content=postData['review'],
+                rating=postData['rating']
+            )
+            review.save()
+
+            review.books.add(book)
+            review.users.add(user)
+
+        except IntegrityError as e:
+            results['status'] = False
+            results['errors'].append(e.message)
+
+        if results['status']:
+            results['review'] = review
         return results
 
 
@@ -154,6 +194,8 @@ class Review(models.Model):
     users = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = ReviewManager()
 
     def __str__(self):
         return str(self.id) + ":" + self.content + " - " + str(self.rating) + ", " + str(self.users)

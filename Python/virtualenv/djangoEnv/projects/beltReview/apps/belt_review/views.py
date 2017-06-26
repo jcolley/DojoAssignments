@@ -77,6 +77,7 @@ def addBook(request):
     if not results['status']:
         for error in results['errors']:
             messages.error(request, error)
+            return redirect('/books')
     else:
         messages.success(request, 'Book Successfully Added.')
     return redirect('books/'+str(results['book'].id))
@@ -97,25 +98,39 @@ def booksView(request, id):
     return render(request, 'belt_review/book.html', context)
 
 
-def userProfile(request):
+def userProfile(request, id):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
-    pass
+    user = User.objects.get(id=id)
+    books = Books.objects.all()
+    context = {
+        'user': user,
+    }
+    return render(request, 'belt_review/user.html', context)
 
 
 def addReview(request):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
-    pass
+
+    results = Review.objects.addReview(request.POST)
+
+    if not results['status']:
+        for error in results['errors']:
+            messages.error(request, error)
+    else:
+        messages.success(request, 'Review Successfully Added.')
+
+    return redirect('/books/' + request.POST['book_id'])
 
 
 def delReview(request, bookid, id):
     if not request.session.get('id'):
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('/')
-    returnpath = '/books/' + bookid
+
     Review.objects.get(id=id).delete()
 
-    return redirect(returnpath)
+    return redirect('/books/' + str(bookid))

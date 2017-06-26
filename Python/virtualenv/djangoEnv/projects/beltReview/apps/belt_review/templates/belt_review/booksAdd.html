@@ -5,6 +5,11 @@
         <meta charset="UTF-8">
     </head>
     <body>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message|safe}}</p>
+            {% endfor %}
+        {% endif %}
         <div>
             <a href="/books">Home</a>&nbsp;&nbsp;
             <a href="/logout">Logout</a>
