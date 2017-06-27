@@ -106,7 +106,7 @@ def userProfile(request, id):
     user = User.objects.get(id=id)
     booktests = Book.objects.all()
     for book in booktests:
-        if book.review_set.all().filter(users=User.objects.get(id=id)):
+        if book.review_set.filter(users=User.objects.get(id=id)):
             commented['books'].append(book)
     context = {
         'user': user,
