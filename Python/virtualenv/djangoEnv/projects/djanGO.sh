@@ -43,7 +43,7 @@ do
 	1 ) editor="atom"; cmd=(atom .); echo "nice choice"; break;;
 	2 ) editor="nano"; cmd=(nano .); echo "nice choice"; break;;
 	3 ) editor="code"; cmd=(code .); echo "nice choice"; break;;
-	4 ) editor="sublime"; cmd=(sublime .); echo "nice choice"; break;;
+	4 ) editor="sublime"; cmd=(subl .); echo "nice choice"; break;;
 	5 ) editor="none"; echo "fair enough"; break;;
 	6 ) echo "Quitting!"; exit;;
 
