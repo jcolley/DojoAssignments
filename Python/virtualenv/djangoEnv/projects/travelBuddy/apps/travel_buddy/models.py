@@ -26,17 +26,16 @@ class TripManager(models.Manager):
             results['status'] = False
             results['errors'].append('You must enter an To date')
 
-        dFrom = datetime.strptime(postData['dFrom'], '%Y-%m-%d').date()
-        dTo = datetime.strptime(postData['dTo'], '%Y-%m-%d').date()
-
-        if dFrom > dTo:
-            results['status'] = False
-            results['errors'].append('From date cannot be after To date')
-        if dFrom < datetime.now().date():
-            results['status'] = False
-            results['errors'].append('From date cannot be before today!')
-
         if results['status']:
+            dFrom = datetime.strptime(postData['dFrom'], '%Y-%m-%d').date()
+            dTo = datetime.strptime(postData['dTo'], '%Y-%m-%d').date()
+
+            if dFrom > dTo:
+                results['status'] = False
+                results['errors'].append('From date cannot be after To date')
+            if dFrom < datetime.now().date():
+                results['status'] = False
+                results['errors'].append('From date cannot be before today!')
             try:
                 owner = User.objects.get(id=postData['owner'])
                 dest = postData['dest']

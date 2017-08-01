@@ -8,7 +8,6 @@ from .models import Trip, User
 # Create your views here.
 def index(request):
     checkAuth(request)
-
     user = User.objects.get(id=request.session['id'])
     trips = Trip.objects.all()
 
@@ -57,6 +56,8 @@ def dest(request, trip_id):
 
 
 def checkAuth(request):  # Force non-authorized user back to login/registration page
+    print "made it"
     if not request.session.get('id'):
+        print 
         messages.error(request, 'Access Denied. Log in first.')
         return redirect('auth:index')

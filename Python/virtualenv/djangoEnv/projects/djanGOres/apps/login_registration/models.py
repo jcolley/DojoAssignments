@@ -9,18 +9,12 @@ import re
 class UserManager(models.Manager):
     def registerVal(self, postData):
         results = {'status': True, 'errors': [], 'user': None}
-        if not postData['first_name'] or len(postData['first_name']) < 3:
+        if not postData['name'] or len(postData['name']) < 3:
             results['status'] = False
-            results['errors'].append('Please enter a valid first name')
-        if not postData['last_name'] or len(postData['last_name']) < 3:
+            results['errors'].append('Please enter a valid name')
+        if not postData['username'] or len(postData['username']) < 3:
             results['status'] = False
-            results['errors'].append('Please enter a valid last name')
-        if not postData['email'] or not re.match(
-            r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
-                postData['email']
-        ):
-            results['status'] = False
-            results['errors'].append('Please enter a valid email')
+            results['errors'].append('Please enter a valid username')
         if not postData['password'] or len(postData['password']) < 8:
             results['status'] = False
             results['errors'].append('Please enter a valid password')
@@ -28,21 +22,18 @@ class UserManager(models.Manager):
             results['status'] = False
             results['errors'].append('Passwords do not match')
 
-        user = User.objects.filter(email=postData['email'])
-
         if results['status']:
             try:
                 user = User.objects.create(
-                    first_name=postData['first_name'],
-                    last_name=postData['last_name'],
-                    email=postData['email'],
+                    name=postData['name'],
+                    username=postData['username'],
                     password=(bcrypt.hashpw(postData['password'].encode(), bcrypt.gensalt())))
                 user.save()
                 results['user'] = user
             except IntegrityError as e:
                 results['status'] = False
                 if 'UNIQUE constraint' in e.message:
-                    results['errors'].append('That email is already registered.')
+                    results['errors'].append('That account is already registered.')
                 else:
                     results['errors'].append(e.message)
         return results
@@ -50,12 +41,12 @@ class UserManager(models.Manager):
     def loginVal(self, postData):
         results = {'status': True, 'user': None, 'errors': []}
         try:
-            user = User.objects.get(email=postData['email'])
+            user = User.objects.get(username=postData['username'])
             if user.password == bcrypt.hashpw(postData['password'].encode(), user.password.encode()):
                 pass
             else:
                 raise Exception()
-        except:
+        except Exception as e:
             results['status'] = False
             results['errors'].append("Incorrect Username or Password")
 
@@ -65,9 +56,10 @@ class UserManager(models.Manager):
 
 
 class User(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=30)
+    username = models.CharField(max_length=30, unique=True)
     password = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
