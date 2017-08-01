@@ -24,3 +24,5 @@ Python/virtualenv/djangoEnv/Scripts
 Python/virtualenv/djangoEnv/tcl
 Python/virtualenv/djangoEnv/share/
 Python/virtualenv/djangoEnv/local/
+csharp/first_csharp/bin/
+csharp/first_csharp/obj/
