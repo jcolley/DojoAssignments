@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace collections_practice
 {
@@ -40,6 +41,40 @@ namespace collections_practice
                 }
                 show += "]";
                 Console.WriteLine(show);
+            }
+
+            // Icecream Flavors
+            List<string> flavs = new List<string>();
+            flavs.Add("Chocolate");
+            flavs.Add("Vanilla");
+            flavs.Add("Strawberry");
+            flavs.Add("Raspberry");
+            flavs.Add("Rocky Road");
+            flavs.Add("Turtle");
+
+            // List Length
+            Console.WriteLine(flavs.Count);
+
+            // 3rd Value Output and Removed
+            Console.WriteLine("The third flavor in the list is: " + flavs[2]);
+            flavs.RemoveAt(2);
+
+            // New Length
+            Console.WriteLine(flavs.Count);
+
+
+            // Create Dictionary
+            Dictionary<string, string> people = new Dictionary<string,string>();
+            Random rand = new Random();
+            foreach(string name in names)
+            {
+                people[name] = flavs[rand.Next(flavs.Count)];
+            }
+
+            // Ouput each name with a random flavor
+            foreach(KeyValuePair<string, string> info in people)
+            {
+                Console.WriteLine(info.Key + " - " + info.Value);
             }
         }
     }
