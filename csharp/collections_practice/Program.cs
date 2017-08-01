@@ -12,7 +12,7 @@ namespace collections_practice
             bool[] alternating = {true,false,true,false,true,false,true,false,true,false};
 
 
-            // Multiplication Table
+            // Generate Multiplication Table
             int[,] mTable = new int[10,10];
             for(int x = 0; x < 10; x++)
             {
@@ -22,12 +22,17 @@ namespace collections_practice
                 }
             }
 
+            // Table Output
             for(int x = 0; x < 10; x++)
             {
                 string show = "[ ";
                 for(int y = 0; y < 10; y++)
                 {
-                    show += mTable[x, y] + ", ";
+                    if(mTable[x,y] > 99){
+                        show += mTable[x, y] + " ";
+                    } else {
+                        show += mTable[x, y] + ", ";
+                    }
                     if(mTable[x,y] < 10)
                     {
                         show += " ";
